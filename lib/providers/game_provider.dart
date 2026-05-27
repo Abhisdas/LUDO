@@ -97,12 +97,10 @@ class GameProvider extends ChangeNotifier {
   List<Map<String, dynamic>> onlinePlayers = [];
   bool isConnecting = false;
   String? errorMessage;
-
   Uri _getServerUri() {
     // If compiled in release mode, use the production deployed server URL
     if (kReleaseMode) {
-      // NOTE: Replace this domain with your actual deployed Render/Railway service domain
-      return Uri.parse('wss://ludoverse-backend.onrender.com');
+      return Uri.parse('wss://ludo-q7r8.onrender.com');
     }
 
     String host = 'localhost';

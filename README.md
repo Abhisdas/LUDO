@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
   <h1>
     <img src="assets/logo.jpg" width="80px"><br/>
@@ -273,4 +274,3 @@ The game includes the following sound effects:
 4. Move pieces by selecting them
 5. Follow standard Ludo rules
 6. Get all pieces home to win!
-
