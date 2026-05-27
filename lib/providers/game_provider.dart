@@ -97,22 +97,27 @@ class GameProvider extends ChangeNotifier {
   List<Map<String, dynamic>> onlinePlayers = [];
   bool isConnecting = false;
   String? errorMessage;
-  Uri _getServerUri() {
-    // If compiled in release mode, use the production deployed server URL
-    if (kReleaseMode) {
-      return Uri.parse('wss://ludo-q7r8.onrender.com');
-    }
+  bool useLocalServer = false;
 
-    String host = 'localhost';
-    if (kIsWeb) {
-      final baseUri = Uri.parse(Uri.base.toString());
-      if (baseUri.host.isNotEmpty) {
-        host = baseUri.host;
+  void toggleServerMode(bool val) {
+    useLocalServer = val;
+    notifyListeners();
+  }
+
+  Uri _getServerUri() {
+    if (useLocalServer) {
+      String host = 'localhost';
+      if (kIsWeb) {
+        final baseUri = Uri.parse(Uri.base.toString());
+        if (baseUri.host.isNotEmpty) {
+          host = baseUri.host;
+        }
+      } else if (defaultTargetPlatform == TargetPlatform.android) {
+        host = '10.0.2.2';
       }
-    } else if (defaultTargetPlatform == TargetPlatform.android) {
-      host = '10.0.2.2';
+      return Uri.parse('ws://$host:8080');
     }
-    return Uri.parse('ws://$host:8080');
+    return Uri.parse('wss://ludo-q7r8.onrender.com');
   }
 
   void createOnlineRoom(String playerName) {

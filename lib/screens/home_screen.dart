@@ -213,13 +213,39 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '🎮 Play with Friends (Online)',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                '🎮 Play with Friends (Online)',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Local Server',
+                    style: TextStyle(
+                      color: Color(0xFF9E9EBE),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Switch(
+                    value: game.useLocalServer,
+                    onChanged: (val) => game.toggleServerMode(val),
+                    activeColor: const Color(0xFF6C3CE1),
+                    activeTrackColor: const Color(0xFF6C3CE1).withOpacity(0.3),
+                    inactiveThumbColor: const Color(0xFF9E9EBE),
+                    inactiveTrackColor: const Color(0xFF0D0D2B),
+                  ),
+                ],
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           // Player Name input
