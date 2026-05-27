@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'voice_chat_helper_stub.dart' if (dart.library.html) 'voice_chat_helper_web.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 enum PlayerColor { red, green, yellow, blue }
 
@@ -79,6 +80,17 @@ class GameProvider extends ChangeNotifier {
   bool gameOver = false;
   int numberOfPlayers = 4;
   bool soundEnabled = true;
+
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  void _playSound(String path) {
+    if (!soundEnabled) return;
+    try {
+      _audioPlayer.play(AssetSource(path));
+    } catch (e) {
+      debugPrint('Error playing sound $path: $e');
+    }
+  }
 
   // Voice Chat State
   bool voiceChatConnected = false;
@@ -332,6 +344,7 @@ class GameProvider extends ChangeNotifier {
 
   Future<void> _applyRemoteRoll(int val) async {
     isRolling = true;
+    _playSound('sounds/roll_the_dice.mp3');
     notifyListeners();
 
     await Future.delayed(const Duration(milliseconds: 600));
@@ -450,6 +463,7 @@ class GameProvider extends ChangeNotifier {
     if (isOnlineMode && currentPlayer.color != myColor) return;
 
     isRolling = true;
+    _playSound('sounds/roll_the_dice.mp3');
     notifyListeners();
 
     await Future.delayed(const Duration(milliseconds: 600));
@@ -558,6 +572,8 @@ class GameProvider extends ChangeNotifier {
     final pieceIndex = player.pieces.indexWhere((p) => p.id == pieceId);
     if (pieceIndex == -1) return;
 
+    _playSound('sounds/move.wav');
+
     final piece = player.pieces[pieceIndex];
     bool extraTurn = false;
 
@@ -586,6 +602,7 @@ class GameProvider extends ChangeNotifier {
 
     if (player.hasWon) {
       player.rank = rankCounter++;
+      _playSound('sounds/laugh.mp3');
       if (rankCounter > numberOfPlayers) {
         gameOver = true;
       }
@@ -609,6 +626,7 @@ class GameProvider extends ChangeNotifier {
         if (piece.position == pos && piece.state == PieceState.active) {
           piece.position = -1;
           piece.state = PieceState.home;
+          _playSound('sounds/laugh.mp3');
         }
       }
     }
