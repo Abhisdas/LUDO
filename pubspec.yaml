@@ -1,0 +1,50 @@
+name: ludo_verse
+description: LudoVerse - A Modern Multiplayer Ludo Board Game
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+  audioplayers: ^6.1.0
+  google_fonts: ^6.2.1
+  lottie: ^3.1.2
+  animated_text_kit: ^4.2.2
+  confetti: ^0.7.0
+  flutter_animate: ^4.5.0
+  web_socket_channel: ^3.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/board.png
+    - assets/images/thankyou.gif
+    - assets/images/dice/1.png
+    - assets/images/dice/2.png
+    - assets/images/dice/3.png
+    - assets/images/dice/4.png
+    - assets/images/dice/5.png
+    - assets/images/dice/6.png
+    - assets/images/dice/draw.gif
+    - assets/images/crown/1st.png
+    - assets/images/crown/2nd.png
+    - assets/images/crown/3rd.png
+    - assets/sounds/laugh.mp3
+    - assets/sounds/move.wav
+    - assets/sounds/roll_the_dice.mp3
+    - assets/logo.jpg
+    - assets/walkthrough/game.png
+    - assets/walkthrough/gaming.jpeg
+    - assets/walkthrough/logo_gaming.jpg
+    - assets/google.jpeg
